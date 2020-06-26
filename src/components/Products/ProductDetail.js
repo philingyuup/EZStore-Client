@@ -12,7 +12,7 @@ class ProductDetail extends Component {
   }
 
   componentDidMount () {
-    axios(`${apiUrl}/products/${this.props.match.params.id}`)
+    axios(`${apiUrl}/products/${this.props.match.params.id}/`)
       .then(res => {
         this.setState({ product: res.data })
       })

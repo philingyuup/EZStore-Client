@@ -13,7 +13,7 @@ class Products extends Component {
   }
 
   componentDidMount () {
-    axios(`${apiUrl}/products`)
+    axios(`${apiUrl}/products/`)
       .then(res => {
         this.setState({ products: res.data })
       })
