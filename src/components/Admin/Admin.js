@@ -6,7 +6,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap'
 
 import apiUrl from '../../apiConfig'
 
-const ProductAdmin = ({ user }) => {
+const ProductAdmin = ({ user, msgAlert }) => {
   const [products, setProducts] = useState([])
 
   useEffect(() => {
@@ -35,6 +35,7 @@ const ProductAdmin = ({ user }) => {
     <Col md={4} s={6} key={product.id}>
       <ProductCard
         user={user}
+        msgAlert={msgAlert}
         name={product.name}
         deleteProduct = {deleteProduct}
         short_description={product.short_description}

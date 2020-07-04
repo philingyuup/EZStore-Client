@@ -69,9 +69,9 @@ class App extends Component {
           <Route exact path='/checkout' render={() => (
             <Checkout checkout={this.checkout} cart={this.state.cart} />
           )} />
-          <Route exact path='/Admin/Create' render={(props) => <ProductForm {...props} user={user}/>} />
-          <Route exact path='/Admin/Edit/:id' render={(props) => <ProductForm {...props} user={user}/>} />
-          <Route exact path='/Admin' render={(props) => <Admin {...props} user={user}/>} />
+          <Route exact path='/Admin/Create' render={(props) => <ProductForm {...props} user={user} msgAlert={this.msgAlert} />} />
+          <Route exact path='/Admin/Edit/:id' render={(props) => <ProductForm {...props} user={user} msgAlert={this.msgAlert} />} />
+          <Route exact path='/Admin' render={(props) => <Admin {...props} user={user} msgAlert={this.msgAlert} />} />
           <AuthenticatedRoute user={user} exact path='/sign-out' render={() => (
             <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
           )} />

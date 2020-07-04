@@ -23,10 +23,12 @@ class Products extends Component {
 
   render () {
     const { products } = this.state
+    const { msgAlert } = this.props
 
     const productsJsx = products.map(product => (
       <Col md={4} s={6} key={product.id}>
         <ProductCard
+          msgAlert={msgAlert}
           name={product.name}
           short_description={product.short_description}
           id={product.id}

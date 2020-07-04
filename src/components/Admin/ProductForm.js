@@ -4,12 +4,13 @@ import { Form, Button } from 'react-bootstrap'
 import apiUrl from '../../apiConfig.js'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
+import messages from '../AutoDismissAlert/messages'
 
 const ProductForm = (props) => {
   const [product, setProduct] = useState({ name: '', img: '', short_description: '', long_description: '', price: 0 })
   const [submitted, setSubmitted] = useState(false)
   const { id } = props.match.params
-  const { user } = props
+  const { user, msgAlert } = props
 
   useEffect(() => {
     if (id) {
@@ -37,7 +38,18 @@ const ProductForm = (props) => {
     const data = parser(product)
     axios.post(`${apiUrl}/products/`, data, { headers: { 'Authorization': `Token ${user.token}` } })
       .then(() => setSubmitted(true))
-      .catch(console.error)
+      .then(() => msgAlert({
+        heading: 'Create Product Success',
+        message: messages.createProductSuccess,
+        variant: 'success'
+      }))
+      .catch(error => {
+        msgAlert({
+          heading: 'Create Product Failed with error: ' + error.message,
+          message: messages.createProductFailure,
+          variant: 'danger'
+        })
+      })
   }
 
   const handlePatch = e => {
@@ -45,7 +57,18 @@ const ProductForm = (props) => {
     const data = parser(product)
     axios.patch(`${apiUrl}/products/${id}/`, data, { headers: { 'Authorization': `Token ${user.token}` } })
       .then(() => setSubmitted(true))
-      .catch(console.error)
+      .then(() => msgAlert({
+        heading: 'Update Product Success',
+        message: messages.updateProductSuccess,
+        variant: 'success'
+      }))
+      .catch(error => {
+        msgAlert({
+          heading: 'Update Product Failed with error: ' + error.message,
+          message: messages.updateProductFailure,
+          variant: 'danger'
+        })
+      })
   }
 
   const parser = unparsedProduct => {
