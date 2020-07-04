@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { Form, Button } from 'react-bootstrap'
-// import apiUrl from '../../apiConfig.js'
+import messages from '../AutoDismissAlert/messages'
 
 const CloudinaryUpload = (props) => {
-  const { setImageLink, imageLink } = props
+  const { setImageLink, imageLink, msgAlert } = props
   const [deleteToken, setDeleteToken] = useState('')
   const [loading, setLoading] = useState(false)
   const [uploaded, setUploaded] = useState(false)
@@ -25,7 +25,18 @@ const CloudinaryUpload = (props) => {
       })
       .then(() => setLoading(false))
       .then(() => setUploaded(true))
-      .catch((err) => console.log(err))
+      .then(() => msgAlert({
+        heading: 'Upload Image Success',
+        message: messages.uploadImageSuccess,
+        variant: 'success'
+      }))
+      .catch(error => {
+        msgAlert({
+          heading: 'Upload Image Failed with error: ' + error.message,
+          message: messages.uploadImageFailure,
+          variant: 'danger'
+        })
+      })
   }
 
   const deleteImage = () => {
@@ -37,7 +48,18 @@ const CloudinaryUpload = (props) => {
       .then(() => setImageLink(''))
       .then(() => setDeleting(''))
       .then(() => setUploaded(false))
-      .catch(console.error)
+      .then(() => msgAlert({
+        heading: 'Delete Image Success',
+        message: messages.deleteImageSuccess,
+        variant: 'success'
+      }))
+      .catch(error => {
+        msgAlert({
+          heading: 'Delete Image Failed with error: ' + error.message,
+          message: messages.deleteImageFailure,
+          variant: 'danger'
+        })
+      })
   }
 
   return (
