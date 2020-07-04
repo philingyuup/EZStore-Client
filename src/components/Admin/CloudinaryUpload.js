@@ -21,7 +21,7 @@ const CloudinaryUpload = props => {
   }
 
   const deleteImage = e {
-    
+
   }
 
 
