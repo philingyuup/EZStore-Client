@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import ProductCard from './ProductCard'
+import { Container, Row, Col } from 'react-bootstrap'
 
 import apiUrl from '../../apiConfig'
 
@@ -24,21 +25,23 @@ class Products extends Component {
     const { products } = this.state
 
     const productsJsx = products.map(product => (
-      <li key={product.id}>
+      <Col md={4} s={6} key={product.id}>
         <ProductCard
           name={product.name}
           short_description={product.short_description}
           id={product.id}
         />
-      </li>
+      </Col>
     ))
 
     return (
       <div>
         <h4>Products</h4>
-        <ul>
-          {productsJsx}
-        </ul>
+        <Container fluid={true}>
+          <Row>
+            {productsJsx}
+          </Row>
+        </Container>
       </div>
     )
   }

@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { Form, Button } from 'react-bootstrap'
+// import apiUrl from '../../apiConfig.js'
 
-const CloudinaryUpload = ({ setImageLink }) => {
-  const [image, setImage] = useState('')
+const CloudinaryUpload = (props) => {
+  const { setImageLink, imageLink } = props
   const [deleteToken, setDeleteToken] = useState('')
   const [loading, setLoading] = useState(false)
+  const [uploaded, setUploaded] = useState(false)
   const [deleting, setDeleting] = useState('')
 
   const uploadImage = (e) => {
@@ -16,14 +18,13 @@ const CloudinaryUpload = ({ setImageLink }) => {
     setLoading(true)
     axios.post('https://api.cloudinary.com/v1_1/dbfulv8ap/image/upload', data)
       .then((res) => {
-        setImage(res.data.secure_url)
+        setImageLink(res.data.secure_url)
         if (res.data.delete_token) {
           setDeleteToken(res.data.delete_token)
         }
-        setLoading(false)
-        return res.data.secure_url
       })
-      .then((secureUrl) => setImageLink(secureUrl))
+      .then(() => setLoading(false))
+      .then(() => setUploaded(true))
       .catch((err) => console.log(err))
   }
 
@@ -33,9 +34,9 @@ const CloudinaryUpload = ({ setImageLink }) => {
       'https://api.cloudinary.com/v1_1/dbfulv8ap/delete_by_token',
       { 'token': deleteToken }
     )
-      .then(() => setImage(''))
       .then(() => setImageLink(''))
       .then(() => setDeleting(''))
+      .then(() => setUploaded(false))
       .catch(console.error)
   }
 
@@ -43,18 +44,17 @@ const CloudinaryUpload = ({ setImageLink }) => {
     <Form.Group>
       <Form.Label>Image Preview</Form.Label>
       <br />
-      {loading ? (
+      {loading && (
         <Form.Label>Loading...</Form.Label>
-      ) : (
-        <img src={image} style={{ width: '50vw' }} />
       )}
+      <img src={imageLink} style={{ width: '50vw' }} />
       <Form.Control
         type='file'
         name='file'
         label='Upload your image'
         onChange={uploadImage}
       />
-      {image !== '' && <Button type='button' onClick={deleteImage}>Delete</Button>}
+      {uploaded && <Button type='button' onClick={deleteImage}>Delete</Button>}
       <h3>{deleting}</h3>
     </Form.Group>
   )

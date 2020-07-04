@@ -1,11 +1,27 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import CloudinaryUpload from './CloudinaryUpload'
 import { Form, Button } from 'react-bootstrap'
 import apiUrl from '../../apiConfig.js'
 import axios from 'axios'
+import { Redirect } from 'react-router-dom'
 
-const ProductForm = ({ user }) => {
+const ProductForm = (props) => {
   const [product, setProduct] = useState({ name: '', img: '', short_description: '', long_description: '', price: 0 })
+  const [submitted, setSubmitted] = useState(false)
+  const { id } = props.match.params
+  const { user } = props
+
+  useEffect(() => {
+    if (id) {
+      axios(`${apiUrl}/products/${id}`)
+        .then(res => setProduct(res.data))
+        .catch(console.error)
+    }
+
+    return () => {
+      setProduct({})
+    }
+  }, [])
 
   const setImageLink = (secureUrl) => {
     setProduct({ ...product, img: secureUrl })
@@ -16,11 +32,19 @@ const ProductForm = ({ user }) => {
     setProduct({ ...product, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = e => {
+  const handlePost = e => {
     e.preventDefault()
     const data = parser(product)
-    axios.post(`${apiUrl}/products/`, data, { headers: { 'Authorization': 'Token 671e97b01d8daf0d49e607c1475518d56f1625b7' } })
-      .then(res => console.log(res))
+    axios.post(`${apiUrl}/products/`, data, { headers: { 'Authorization': `Token ${user.token}` } })
+      .then(() => setSubmitted(true))
+      .catch(console.error)
+  }
+
+  const handlePatch = e => {
+    e.preventDefault()
+    const data = parser(product)
+    axios.patch(`${apiUrl}/products/${id}/`, data, { headers: { 'Authorization': `Token ${user.token}` } })
+      .then(() => setSubmitted(true))
       .catch(console.error)
   }
 
@@ -34,9 +58,20 @@ const ProductForm = ({ user }) => {
     return parsedProduct
   }
 
+  if (!user) {
+    return <Redirect to={'/'} />
+  } else if (!user.is_staff) {
+    return <Redirect to={'/'} />
+  }
+
+  if (submitted) {
+    return <Redirect to={'/Admin'} />
+  }
+
   return (
-    <Form onSubmit={handleSubmit}>
-      <CloudinaryUpload setImageLink={setImageLink} />
+    <Form onSubmit={ id ? handlePatch : handlePost}>
+      <h3> { id ? 'Edit Item' : 'Create Item'} </h3>
+      <CloudinaryUpload setImageLink={setImageLink} imageLink={product.img} />
       <Form.Group controlId='formName'>
         <Form.Label>Product Name</Form.Label>
         <Form.Control type='text' name='name' value={product.name} placeholder='name' onChange={handleChange} />
@@ -53,7 +88,7 @@ const ProductForm = ({ user }) => {
         <Form.Label>Price (ex: 39.95)</Form.Label>
         <Form.Control type='number' name='price' value={product.price} placeholder='$0,000.00' onChange={handleChange} />
       </Form.Group>
-      <Button type='submit'>Submit Item</Button>
+      <Button type='submit'>{ id ? 'Edit Item' : 'Submit Item' }</Button>
     </Form>
   )
 }

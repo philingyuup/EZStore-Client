@@ -13,6 +13,7 @@ import Products from '../Products/Products'
 import ProductDetail from '../Products/ProductDetail'
 import Checkout from '../Cart/Checkout'
 import ProductForm from '../Admin/ProductForm'
+import Admin from '../Admin/Admin'
 
 class App extends Component {
   constructor () {
@@ -68,7 +69,9 @@ class App extends Component {
           <Route exact path='/checkout' render={() => (
             <Checkout checkout={this.checkout} cart={this.state.cart} />
           )} />
-          <Route exact path='/Admin' component ={ProductForm} />
+          <Route exact path='/Admin/Create' render={(props) => <ProductForm {...props} user={user}/>} />
+          <Route exact path='/Admin/Edit/:id' render={(props) => <ProductForm {...props} user={user}/>} />
+          <Route exact path='/Admin' render={(props) => <Admin {...props} user={user}/>} />
           <AuthenticatedRoute user={user} exact path='/sign-out' render={() => (
             <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
           )} />

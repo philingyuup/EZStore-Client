@@ -3,7 +3,7 @@ import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
 
 const authenticatedOptions = (
   <Fragment>
-    <NavDropdown title="User" id="collapsible-nav-dropdown">
+    <NavDropdown alignRight title="Settings" id="collapsible-nav-dropdown">
       <NavDropdown.Item href="#change-password">Change Password</NavDropdown.Item>
       <NavDropdown.Item href="#sign-out">Sign Out</NavDropdown.Item>
     </NavDropdown>
@@ -12,7 +12,7 @@ const authenticatedOptions = (
 
 const unauthenticatedOptions = (
   <Fragment>
-    <NavDropdown alignRight title="User" id="collapsible-nav-dropdown">
+    <NavDropdown alignRight title="Login" id="collapsible-nav-dropdown">
       <NavDropdown.Item href="#sign-up">Sign Up</NavDropdown.Item>
       <NavDropdown.Item href="#sign-in">Sign In</NavDropdown.Item>
     </NavDropdown>
@@ -21,14 +21,14 @@ const unauthenticatedOptions = (
 
 const alwaysOptions = (
   <Fragment>
-    <Nav.Link href="#">Home</Nav.Link>
+    <Nav.Link href="#/">Home</Nav.Link>
     <Nav.Link href="#products">Products</Nav.Link>
     <Nav.Link href="#checkout">Checkout</Nav.Link>
   </Fragment>
 )
 
 const Header = ({ user }) => (
-  <Navbar bg="dark" variant="light" expand="md">
+  <Navbar bg="secondary" variant="dark" expand="md">
     <Navbar.Brand href="#">
       EZStore
     </Navbar.Brand>
@@ -36,6 +36,7 @@ const Header = ({ user }) => (
     <Navbar.Collapse id="responsive-navbar-nav">
       <Nav className="ml-auto">
         { user && <span className="navbar-text mr-2">Welcome, {user.email}</span>}
+        { user ? (user.is_staff && <Nav.Link href="#Admin">Admin</Nav.Link>) : '' }
         { alwaysOptions }
         { user ? authenticatedOptions : unauthenticatedOptions }
       </Nav>
