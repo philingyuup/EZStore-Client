@@ -1,7 +1,7 @@
 let apiUrl
 const apiUrls = {
   production: 'https://ezstore-server.herokuapp.com',
-  development: 'https://localhost:8000'
+  development: 'http://localhost:8000'
   // development: 'https://ezstore-server.herokuapp.com'
 }
 
