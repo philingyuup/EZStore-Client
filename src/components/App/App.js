@@ -12,7 +12,7 @@ import Home from '../Home/Home'
 import Products from '../Products/Products'
 import ProductDetail from '../Products/ProductDetail'
 import Checkout from '../Cart/Checkout'
-import CloudinaryUpload from '../Admin/CloudinaryUpload'
+import ProductForm from '../Admin/ProductForm'
 
 class App extends Component {
   constructor () {
@@ -68,7 +68,7 @@ class App extends Component {
           <Route exact path='/checkout' render={() => (
             <Checkout checkout={this.checkout} cart={this.state.cart} />
           )} />
-          <Route exact path='/Admin' component ={CloudinaryUpload} />
+          <Route exact path='/Admin' component ={ProductForm} />
           <AuthenticatedRoute user={user} exact path='/sign-out' render={() => (
             <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
           )} />
