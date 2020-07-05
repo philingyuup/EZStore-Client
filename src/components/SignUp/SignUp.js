@@ -26,24 +26,33 @@ class SignUp extends Component {
     event.preventDefault()
 
     const { msgAlert, history, setUser } = this.props
+    const { password, passwordConfirmation } = this.state
 
-    signUp(this.state)
-      .then(() => signIn(this.state))
-      .then(res => setUser(res.data))
-      .then(() => msgAlert({
-        heading: 'Sign Up Success',
-        message: messages.signUpSuccess,
-        variant: 'success'
-      }))
-      .then(() => history.push('/'))
-      .catch(error => {
-        this.setState({ email: '', password: '', passwordConfirmation: '' })
-        msgAlert({
-          heading: 'Sign Up Failed with error: ' + error.message,
-          message: messages.signUpFailure,
-          variant: 'danger'
+    if (password === passwordConfirmation) {
+      signUp(this.state)
+        .then(() => signIn(this.state))
+        .then(res => setUser(res.data))
+        .then(() => msgAlert({
+          heading: 'Sign Up Success',
+          message: messages.signUpSuccess,
+          variant: 'success'
+        }))
+        .then(() => history.push('/'))
+        .catch(error => {
+          this.setState({ email: '', password: '', passwordConfirmation: '' })
+          msgAlert({
+            heading: 'Sign Up Failed with error: ' + error.message,
+            message: messages.signUpFailure,
+            variant: 'danger'
+          })
         })
+    } else {
+      msgAlert({
+        heading: 'Password Error',
+        message: 'Passwords do not match',
+        variant: 'danger'
       })
+    }
   }
 
   render () {
@@ -72,7 +81,7 @@ class SignUp extends Component {
                 name="password"
                 value={password}
                 type="password"
-                placeholder="Password"
+                placeholder="minimum 6 characters"
                 onChange={this.handleChange}
               />
             </Form.Group>
@@ -83,7 +92,7 @@ class SignUp extends Component {
                 name="passwordConfirmation"
                 value={passwordConfirmation}
                 type="password"
-                placeholder="Confirm Password"
+                placeholder="minimum 6 characters"
                 onChange={this.handleChange}
               />
             </Form.Group>
