@@ -9,7 +9,6 @@ class Checkout extends Component {
   }
 
   render () {
-    console.log(this.props.cart)
     const cartJsx = this.props.cart.map(product => (
       <tr key={product.id}>
         <td>{product.id} </td>
