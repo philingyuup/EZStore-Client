@@ -50,8 +50,8 @@ class SignIn extends Component {
     event.preventDefault()
     const { msgAlert, history, setUser } = this.props
     signIn({
-      email: 'dad@dad.com',
-      password: 'daddy'
+      email: 'mom@mom.com',
+      password: 'mommy'
     })
       .then(res => {
         setUser(res.data)
