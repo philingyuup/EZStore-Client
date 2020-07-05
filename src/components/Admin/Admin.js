@@ -14,7 +14,18 @@ const ProductAdmin = ({ user, msgAlert }) => {
       .then(res => {
         setProducts(res.data)
       })
-      .catch(console.error)
+      .then(() => msgAlert({
+        heading: 'Get Product Success',
+        message: 'The client was able to fetch the products from the server',
+        variant: 'success'
+      }))
+      .catch(error => {
+        msgAlert({
+          heading: 'Get Product Failed with error: ' + error.message,
+          message: 'The client failed to fetch the products from the server',
+          variant: 'danger'
+        })
+      })
 
     return () => {
       setProducts([])
