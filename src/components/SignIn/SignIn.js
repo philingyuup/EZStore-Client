@@ -46,6 +46,32 @@ class SignIn extends Component {
       })
   }
 
+  adminLogin = event => {
+    event.preventDefault()
+    const { msgAlert, history, setUser } = this.props
+    signIn({
+      email: 'dad@dad.com',
+      password: 'daddy'
+    })
+      .then(res => {
+        setUser(res.data)
+      })
+      .then(() => msgAlert({
+        heading: 'Sign In Success',
+        message: messages.adminLoginSuccess,
+        variant: 'success'
+      }))
+      .then(() => history.push('/'))
+      .catch(error => {
+        this.setState({ email: '', password: '' })
+        msgAlert({
+          heading: 'Sign In Failed with error: ' + error.message,
+          message: messages.adminLoginFailure,
+          variant: 'danger'
+        })
+      })
+  }
+
   render () {
     const { email, password } = this.state
 
@@ -81,6 +107,13 @@ class SignIn extends Component {
               type="submit"
             >
               Submit
+            </Button>
+            <Button
+              variant="secondary"
+              type="button"
+              onClick={this.adminLogin}
+            >
+              Admin-Login
             </Button>
           </Form>
         </div>

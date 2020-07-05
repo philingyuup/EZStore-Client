@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
+import { Table } from 'react-bootstrap'
 
 class Checkout extends Component {
   constructor (props) {
@@ -10,18 +11,30 @@ class Checkout extends Component {
   render () {
     console.log(this.props.cart)
     const cartJsx = this.props.cart.map(product => (
-      <li key={product.id}>
-        <div>Name: {product.name} </div>
-        <div>Price: {product.price} </div>
-      </li>
+      <tr key={product.id}>
+        <td>{product.id} </td>
+        <td>{product.name} </td>
+        <td>{product.price} </td>
+      </tr>
     ))
 
     return (
       <div>
-        <h4>Checkout Cart</h4>
-        <ul>
-          {cartJsx}
-        </ul>
+        <h2>Checkout Cart</h2>
+        <Table className='checkoutTable' size='md' striped bordered hover>
+          <thead>
+            <tr>
+              <th> ID </th>
+              <th> NAME </th>
+              <th> PRICE </th>
+            </tr>
+          </thead>
+          <tbody>
+            {cartJsx}
+          </tbody>
+        </Table>
+        <div className='noDetailImage'>Shipping Stuff (USPS Webtools) </div>
+        <div className='noDetailImage'>Payment Stuff (Stripe API) </div>
       </div>
     )
   }

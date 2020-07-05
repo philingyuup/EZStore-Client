@@ -64,7 +64,7 @@ class App extends Component {
             <Products msgAlert={this.msgAlert} checkout={this.checkout} />
           )} />
           <Route exact path='/products/:id' render={(props) => (
-            <ProductDetail {...props} checkout={this.checkout} cart={this.state.cart} />
+            <ProductDetail {...props} msgAlert={this.msgAlert} checkout={this.checkout} cart={this.state.cart} />
           )} />
           <Route exact path='/checkout' render={() => (
             <Checkout checkout={this.checkout} cart={this.state.cart} />

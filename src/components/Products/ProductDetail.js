@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-
+import { Button } from 'react-bootstrap'
 import apiUrl from '../../apiConfig'
 
 class ProductDetail extends Component {
@@ -25,25 +25,30 @@ class ProductDetail extends Component {
       price: this.state.product.price,
       id: this.state.product.id
     })
-  }
-
-  componentDidUpdate () {
-    console.log(this.props.cart)
+    this.props.history.push('/Products/')
+    this.props.msgAlert({
+      heading: 'Success!',
+      message: 'Added To Cart',
+      variant: 'success'
+    })
   }
 
   render () {
     const { product } = this.state
 
     return (
-      <div>
-        <img src={product.img} />
-        <h3>{product.name}</h3>
-        <div> {product.short_description} </div>
+      <div className='detailContainer'>
+        <h2>{product.name}</h2>
+        { product.img
+          ? <img className='detailImage' src={product.img} />
+          : <div className='noDetailImage'> No Image </div>
+        }
         <br/>
-        <div>
+        <div className='detailDescription'>
           Description: {product.long_description}
         </div>
-        <button onClick={this.handleCart}> Add to cart </button>
+        <div className='detailPrice'> $ {product.price} </div>
+        <Button onClick={this.handleCart}> Add to cart </Button>
       </div>
     )
   }

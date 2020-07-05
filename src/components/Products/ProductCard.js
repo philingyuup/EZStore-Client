@@ -25,14 +25,23 @@ const ProductCard = props => {
         })
       })
   }
+
   return (
     <div>
-      <Card style={{ width: '18rem' }}>
-        <Card.Img variant="top" src={props.img} />
+      <Card className='productCards'>
+        <div className='cardImageContainer'>
+          {props.img
+            ? <Card.Img variant="top" src={props.img} className='cardImage'/>
+            : <div className='noCardImage'>No Image</div>
+          }
+        </div>
         <Card.Body>
-          <Card.Title>{props.name}</Card.Title>
+          <Card.Title className='cardTitle'>{props.name}</Card.Title>
+          <Card.Text className='cardDescription'>
+            {props.short_description ? props.short_description : '*No Description*'}
+          </Card.Text>
           <Card.Text>
-            {props.short_description}
+            $ {props.price}
           </Card.Text>
           {props.editable
             ? (<div> <Button variant="primary" href={`#Admin/Edit/${props.id}`}>Edit</Button>

@@ -29,7 +29,9 @@ class Products extends Component {
       <Col md={4} s={6} key={product.id}>
         <ProductCard
           msgAlert={msgAlert}
+          img={product.img}
           name={product.name}
+          price={product.price}
           short_description={product.short_description}
           id={product.id}
         />
@@ -38,7 +40,8 @@ class Products extends Component {
 
     return (
       <div>
-        <h4>Products</h4>
+        <h2>Products</h2>
+        <br/>
         <Container fluid={true}>
           <Row>
             {productsJsx}

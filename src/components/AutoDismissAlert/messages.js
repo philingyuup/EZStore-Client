@@ -15,5 +15,7 @@ export default {
   createProductSuccess: 'Successfully created the item! You can always go back and edit',
   createProductFailure: 'Womp Womp! Something went wrong with the server',
   updateProductSuccess: 'Successfully updated the item!',
-  updateProductFailure: 'Womp Womp! Something went wrong with the server'
+  updateProductFailure: 'Womp Womp! Something went wrong with the server',
+  adminLoginSuccess: 'Welcome! Please do not change the password!',
+  adminLoginFailure: 'Failed to sign in. Please contact the developer.'
 }

@@ -37,6 +37,7 @@ const ProductAdmin = ({ user, msgAlert }) => {
         user={user}
         msgAlert={msgAlert}
         name={product.name}
+        price={product.price}
         deleteProduct = {deleteProduct}
         short_description={product.short_description}
         editable={true}
@@ -47,15 +48,15 @@ const ProductAdmin = ({ user, msgAlert }) => {
 
   return (
     <div>
-      <h3>Admin Page</h3>
+      <h2>Admin Page</h2>
       <Container fluid={true}>
+        <Row>
+          {productsJsx}
+        </Row>
         <Row>
           <Link to='/Admin/Create'>
             <Button type='button'>Create New Item</Button>
           </Link>
-        </Row>
-        <Row>
-          {productsJsx}
         </Row>
       </Container>
     </div>

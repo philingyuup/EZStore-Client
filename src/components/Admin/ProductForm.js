@@ -93,7 +93,7 @@ const ProductForm = (props) => {
 
   return (
     <Form onSubmit={ id ? handlePatch : handlePost}>
-      <h3> { id ? 'Edit Item' : 'Create Item'} </h3>
+      <h2> { id ? 'Edit Item' : 'Create Item'} </h2>
       <CloudinaryUpload setImageLink={setImageLink} imageLink={product.img} msgAlert={msgAlert} />
       <Form.Group controlId='formName'>
         <Form.Label>Product Name</Form.Label>
