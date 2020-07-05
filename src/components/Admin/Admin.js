@@ -36,6 +36,7 @@ const ProductAdmin = ({ user, msgAlert }) => {
       <ProductCard
         user={user}
         msgAlert={msgAlert}
+        img={product.img}
         name={product.name}
         price={product.price}
         deleteProduct = {deleteProduct}
