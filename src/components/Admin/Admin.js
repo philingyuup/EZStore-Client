@@ -50,14 +50,18 @@ const ProductAdmin = ({ user, msgAlert }) => {
   return (
     <div>
       <h2>Admin Page</h2>
+      <br/>
       <Container fluid={true}>
-        <Row>
-          {productsJsx}
-        </Row>
+        <h3> Create New Item </h3>
         <Row>
           <Link to='/Admin/Create'>
-            <Button type='button'>Create New Item</Button>
+            <Button className='createItemButton' type='button'>Create New Item</Button>
           </Link>
+        </Row>
+        <br/>
+        <h3> Products </h3>
+        <Row>
+          {productsJsx}
         </Row>
       </Container>
     </div>
