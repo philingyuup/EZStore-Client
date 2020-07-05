@@ -20,7 +20,7 @@ I wanted to make an e-commerce store that gives admin abilities for the owner an
 1. As a user I’d like for my customers to be able to checkout and buy items
 1. As a user I’d like for my customers to be able to search for items
 
-### Wireframe:
+## Wireframe:
 ![](public/EZStore-WireFrame.png)
 
 ## Technologies Used
