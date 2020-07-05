@@ -1,10 +1,10 @@
 # EZStore-Client
 
 ## Links
-- [Client App](https://philingyuup.github.io/EZStore-Client/){target="_blank"}
-- [Client Repo](https://github.com/philingyuup/EZStore-Client){target="_blank"}
-- [API App](https://ezstore-server.herokuapp.com/){target="_blank"}
-- [API Repo](https://github.com/philingyuup/EZStore-Server){target="_blank"}
+- [Client App](https://philingyuup.github.io/EZStore-Client/)
+- [Client Repo](https://github.com/philingyuup/EZStore-Client)
+- [API App](https://ezstore-server.herokuapp.com/)
+- [API Repo](https://github.com/philingyuup/EZStore-Server)
 
 ## Intro
 EZStore is an e-commerce store that is customizable through admin abilities given to owners or staff members of the store. EZStore-Client is the store/app built using React, Cloudinary, and Axios. All users have a is_staff property (true/false). If you are a staff (is_staff=true), you will get access to the admin page to be able to add/delete product items from the page. As of right now, there is no way to change your is_staff status from the admin page (even if you're an owner). That has to be done with the django backpage. If you're interested in testing out the admin functions, please use the 'Admin-Login' button found in /sign-in/ (NOTE: please don't change the password once logged in as Admin).
