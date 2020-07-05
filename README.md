@@ -1,16 +1,20 @@
 # EZStore-Client
 
 ## Links
-- [Client App](https://philingyuup.github.io/EZStore-Client/)
-- [Client Repo](https://github.com/philingyuup/EZStore-Client)
-- [API App](https://ezstore-server.herokuapp.com/)
-- [API Repo](https://github.com/philingyuup/EZStore-Server)
+- [Client App](https://philingyuup.github.io/EZStore-Client/){target="_blank"}
+- [Client Repo](https://github.com/philingyuup/EZStore-Client){target="_blank"}
+- [API App](https://ezstore-server.herokuapp.com/){target="_blank"}
+- [API Repo](https://github.com/philingyuup/EZStore-Server){target="_blank"}
 
 ## Intro
 EZStore is an e-commerce store that is customizable through admin abilities given to owners or staff members of the store. EZStore-Client is the store/app built using React, Cloudinary, and Axios. All users have a is_staff property (true/false). If you are a staff (is_staff=true), you will get access to the admin page to be able to add/delete product items from the page. As of right now, there is no way to change your is_staff status from the admin page (even if you're an owner). That has to be done with the django backpage. If you're interested in testing out the admin functions, please use the 'Admin-Login' button found in /sign-in/ (NOTE: please don't change the password once logged in as Admin).
 
 ## Planning Story
 I wanted to make an e-commerce store that gives admin abilities for the owner and staff members of the site. The admin abilities include being able to edit the store, choose different templates/layouts, and upload products. Customers are also able to login and perform actions as a repeated customer (saved mailing address and credit cards). For the MVP, it'll just be the ability to CRUD products onto the page (as a staff member of the ecommerce store). Regular users (customers) won't be able to access the Admin page and only has read-only access to the server.
+
+## Site
+![](public/home-page.png)
+![](public/admin-page.png)
 
 ## User Stories
 1. As a user I’d like an online store where I can display and sell my items
